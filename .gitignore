@@ -1,0 +1,18 @@
+# Secrets and Environment Variables
+.env
+.env.*
+tokens.json
+
+# Browser Profile Data
+chrome_profile/
+
+# Temporary Node Scripts
+inject_login.js
+check_tab.js
+cdp_helper.js
+check_tabs.js
+generate_github_token.js
+generate_hf_token.js
+generate_gitlab_token.js
+inspect_gitlab_welcome.js
+node_modules/
