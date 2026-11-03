@@ -6,17 +6,18 @@
 
 # Olá, eu sou o Opilnig 👋
 
-Programador de sistemas, entusiasta de processamento digital de sinais (DSP) e hacker de áudio open-source. Passo meus dias projetando pipelines de áudio determinísticos em tempo real com Rust, construindo arquiteturas de sintetizadores modulares e explorando áudio web de latência zero através de WebAssembly.
+Programador sênior de sistemas, especialista em processamento digital de sinais (DSP) e engenheiro de software de áudio open-source. Meu foco está no desenvolvimento de sistemas determinísticos de áudio em tempo real com Rust, arquiteturas modulares de sintetizadores e softwares de áudio de ultra-baixa latência para plataformas nativas e web via WebAssembly.
 
-Quando não estou caçando quedas de áudio em escala de nanossegundos (buffer underruns) ou modificando circuitos analógicos clássicos dos anos 80 (circuit bending), você me encontrará calibrando amplificadores valvulados, escrevendo kernels de cálculo DSP personalizados ou contribuindo para a infraestrutura de áudio de baixo nível.
+Meu trabalho é guiado pela robustez numérica, precisão temporal em escala de microssegundos e design de sistemas com alta eficiência de cache. Longe do terminal, dedico-me a testes de bancada em circuitos analógicos discretos, calibração de amplificadores valvulados e projeto de filtros DSP personalizados.
 
 ---
 
-## 🛠️ Foco Principal e Filosofia de Engenharia
+## 🛠️ Foco de Engenharia e Princípios Arquiteturais
 
-- **DSP em Tempo Real e Síntese Sonora**: Criação de motores wavetable polifônicos, modelagem física acústica e filtros analógicos com feedback de atraso zero (Zero-Delay Feedback - ZDF).
-- **Engenharia de Sistemas de Ultra Baixa Latência**: Buffers circulares livres de bloqueio (lock-free ring buffers), kernels matemáticos acelerados por SIMD e gerenciamento determinístico de memória sem pausas de coleta de lixo (GC).
-- **Pontes entre Áudio Embarcado e Web**: Compilação cruzada de bases de código Rust DSP tanto para plugins nativos de desktop VST3/CLAP quanto para módulos de alta performance em WebAssembly/AudioWorklet.
+- **Áudio Determinístico em Tempo Real**: Threads de renderização sem alocação dinâmica (Zero-allocation), buffers circulares livres de bloqueio (Lock-free) e loops de DSP de tempo delimitado sem interrupção de amostras.
+- **Computação Numérica de Alta Performance**: Núcleos vetoriais acelerados por SIMD (AVX2/NEON), topologias de filtros analógicos com feedback de atraso zero (ZDF) e solucionadores de circuitos não lineares.
+- **Arquitetura de Áudio Multiplataforma**: Estruturação de bases de código portáveis em Rust e C++ moderno compiladas para padrões de plugins desktop (CLAP, VST3) e AudioWorklets em navegadores.
+- **Engenharia de Sistemas Confiável**: Aplicação estrita de invariantes de concorrência, garantia de segurança de memória e comportamento determinístico em todos os ambientes alvo.
 
 ---
 
@@ -26,58 +27,58 @@ Quando não estou caçando quedas de áudio em escala de nanossegundos (buffer u
 | :--- | :--- |
 | **Sistemas Centrais** | Rust, Modern C++ (C++20), C, Zig |
 | **Áudio & DSP** | WebAssembly, AudioWorklet, SIMD (AVX2/NEON), FAUST, JUCE, CLAP / VST3 |
-| **Firmware & Embarcados** | STM32 (ARM Cortex-M4/M7), ESP32, Teensy, FreeRTOS, Embedded Rust |
-| **Protocolos & Padrões** | MIDI 2.0, OSC (Open Sound Control), I2S, SPI, USB Audio Class 2.0 |
-| **Ferramentas & Plataformas** | Linux (Arch / Debian com kernel de tempo real), Git, CMake, Cargo, GDB, Valgrind, Wireshark |
+| **Embarcados & Firmware** | STM32 (ARM Cortex-M4/M7), ESP32, Teensy, FreeRTOS, Embedded Rust |
+| **Protocolos & I/O** | MIDI 2.0 (UMP), OSC (Open Sound Control), I2S, SPI, USB Audio Class 2.0 |
+| **Plataformas & Profiling** | Linux (Kernel de Tempo Real), Git, CMake, Cargo, GDB, Valgrind, Perf, Wireshark |
 
 ---
 
-## 🚀 Projetos Ativos e Experimentos
+## 🚀 Principais Projetos de Código Aberto
 
 ### 1. [pulse-dsp](https://github.com/opilnig-rgb)
-> Motor de síntese modular DSP sem alocações dinâmicas de memória (zero-allocation) e livre de bloqueios, escrito inteiramente em Rust moderno. Conta com osciladores de trem de impulsos com limitação de banda (BLIT), filtros ladder ZDF e uma matriz de patch extensível operando a 192 kHz com latência de ida e volta inferior a um milissegundo.
+> Motor de sintetizador modular DSP sem alocações dinâmicas e livre de bloqueios, construído em Rust puro. Conta com osciladores de trem de pulsos com banda limitada (BLIT), filtros ladder ZDF e uma matriz polifônica extensível operando a 192 kHz com latência de ida e volta inferior a um milissegundo.
 
 ### 2. [wasm-audio-canvas](https://github.com/opilnig-rgb)
-> Visualizador de áudio interativo e rack modular baseado em nós executado em velocidade nativa no navegador via WebAssembly e AudioWorklet. Alimentado por SharedArrayBuffer e filas atômicas sem travas.
+> Visualizador de áudio interativo de alto rendimento e rack modular baseado em nós, rodando com velocidade nativa no navegador via WebAssembly e AudioWorklet. Construído sobre SharedArrayBuffer e filas atômicas sem bloqueio.
 
 ### 3. [midi2-router](https://github.com/opilnig-rgb)
-> Roteador e inspetor de pacotes MIDI 2.0 Universal MIDI Packet (UMP) ultraleve e multiplataforma. Suporta pitch bend por nota em alta resolução, perfis de articulação e descoberta bidirecional de dispositivos.
+> Roteador e inspetor de protocolo MIDI 2.0 Universal MIDI Packet (UMP) ultra-leve e multiplataforma. Oferece suporte a pitch bend de alta resolução por nota, perfis de articulação e descoberta bidirecional de dispositivos.
 
 ### 4. [analog-modeler](https://github.com/opilnig-rgb)
-> Simulação numérica discreta não-linear de amplificadores operacionais de transcondutância (OTA) e circuitos ceifadores de diodo clássicos utilizando análise nodal modificada (MNA) e resolvedores de Newton-Raphson.
+> Simulação numérica discreta não linear de amplificadores operacionais de transcondutância (OTA) analógicos clássicos e circuitos limitadores de diodo usando análise nodal modificada (MNA) e solucionadores Newton-Raphson amortecidos.
 
 ---
 
-## 📊 Filosofia de Código e Artesanato
+## 📊 Filosofia de Código e Arquitetura
 
 ```rust
 pub trait AudioProcessor: Send {
-    /// Processamento puramente determinístico de blocos de áudio sem alocações na heap.
+    /// Processamento determinístico de blocos de áudio sem alocações na heap ou bloqueios.
     fn process_block(&mut self, input: &[f32], output: &mut [f32], sample_rate: f64);
 }
 ```
 
-- **Zero Alocação em Caminhos Críticos (Zero Allocation in Hot Paths)**: Threads de áudio em tempo real jamais devem ser bloqueadas por malloc, operações de E/S de arquivos ou travas mutex.
-- **Matemática Determinística**: Cada cálculo numérico deve ser exato ao nível de bit, estritamente limitado e imune à perda de desempenho causada por números flutuantes subnormais (denormals).
-- **Padrões Abertos**: Construir ecossistemas de ferramentas livres de aprisionamento tecnológico (vendor lock-in) e interoperáveis em qualquer plataforma.
+- **Zero Allocation em Caminhos Críticos**: Threads de tempo real jamais devem invocar alocadores de heap, descritores de arquivos ou primitivas de bloqueio.
+- **Matemática Determinística**: Toda computação de ponto flutuante deve ser estritamente limitada, exata bit a bit e protegida contra perda de desempenho por números desnormalizados (Denormals).
+- **Padrões Abertos**: Desenvolvimento de software modular limpo, livre de dependências proprietárias e totalmente interoperável entre sistemas operacionais.
 
 ---
 
-## 🎧 Laboratório de Hardware & Bancada
+## 🎧 Bancada de Hardware & Instrumentação
 
-- **Osciloscópio**: Rigol DS1054Z Osciloscópio digital de armazenamento de 4 canais
-- **Interface de Áudio**: RME Babyface Pro FS (clock SteadyClock FS de baixíssimo jitter)
-- **Monitores & Fones**: Genelec 8030C, Sennheiser HD600 (calibrados para campo difuso)
-- **Equipamentos Modulares**: Gabinetes Eurorack personalizados, clones Mutable Instruments, placas de desenvolvimento Teensy 4.1
+- **Instrumentação**: Osciloscópio Digital de 4 Canais Rigol DS1054Z
+- **Interface de Áudio**: RME Babyface Pro FS (Referência SteadyClock FS de baixíssimo jitter)
+- **Monitores & Fones**: Monitores Ativos Genelec 8030C e fones Sennheiser HD600 (campo difuso)
+- **Equipamentos Modulares**: Gabinetes Eurorack customizados, módulos de filtros analógicos discretos, placas de desenvolvimento Teensy 4.1
 
 ---
 
 ## 📫 Conexão e Colaboração
 
-- **GitHub Discussions**: Sinta-se à vontade para abrir uma issue ou discussão nos meus repositórios para falar sobre algoritmos DSP, arquitetura de áudio ou ideias de patch.
-- **Tópicos Favoritos**: Topologia de filtros, algoritmos de antialiasing, anéis de memória em tempo real sem bloqueios e esquemas eletrônicos de sintetizadores modulares DIY.
-- **Meta Atual**: Lançar uma suíte completa de plugins de áudio nativos CLAP/VST3 construída puramente em Rust de código aberto.
+- **GitHub Discussions**: Sinta-se à vontade para abrir issues ou discussões em qualquer um dos meus repositórios sobre algoritmos DSP, arquitetura de áudio ou diagramas de sintetizadores.
+- **Tópicos Técnicos**: Topologia de filtros, algoritmos de antialiasing, estruturas de dados concorrentes sem bloqueio e simulação analógica discreta.
+- **Foco Atual**: Lançamento de uma suíte de plugins de áudio CLAP/VST3 multiplataforma para produção, desenvolvida puramente em Rust open-source.
 
 ---
 
-*“Entram bits, sai som cristalino. Mantenha a latência próxima de zero.”*
+*“Arquitetura limpa, execução determinística e latência próxima de zero.”*
